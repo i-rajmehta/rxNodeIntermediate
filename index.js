@@ -69,8 +69,8 @@ app.post('/api/auth/register', async (req, res) => {
     if (validator.isEmpty(email) || !validator.isEmail(email)) {
         error = 'Please enter email should not be empty and enter in correct format only.';
     }
-    if (!validator.isLength(password, { min: 8, max: 50 })) {
-        error = 'Password must containst atleast 8 character.';
+    if (!validator.isStrongPassword(password, { minLength: 8, minLowercase: 1, minUppercase: 1, minSymbols: 1 })) {
+        error = 'Password must containst atleast 8 character long and Contains one UpperCase, one LowerCase and one Spcial Symbol.';
     }
     if (!validator.isNumeric(phone_number) || !validator.isLength(phone_number, { min: 10, max: 10 })) {
         error = 'Phone Number should be numeric only and lenght of 10.';
